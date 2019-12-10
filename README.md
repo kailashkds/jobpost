@@ -1,4 +1,4 @@
-Hopenergie
+Job post
 ==========
 
 Symfony project 3.4
@@ -6,48 +6,56 @@ Symfony project 3.4
 
 # Installation
 
-* Install external packaged
+* Git clone
 ``` bash
-$ composer install
+$ git clone https://github.com/kailashkds/jobpost.git
 ```
   * **NOTE**
-  composer update should be done only by project **technical lead**
-  ``` bash
-  $ composer update
-  ```
+    Before moving further we need to have docker and docker-compose installed on your pc. Kindly Google for it.
 
-## Setup Sonata Page manually
+## Once docker is install follow the below steps
 
-* **1) Create Site**
+* **1) Inside the docker folder
 ``` bash
-$ sudo -u www-data bin/console sonata:page:create-site --enabled=true --name=hopenergie --locale=- --host=vagrant.hopenergie.com --relativePath=/ --enabledFrom=now --enabledTo="+10 years" --default=true
+$ cd jobpost/
 ```
 
-* **2) Update routes**
+* **2) Build Docker**
 ``` bash
-$ sudo -u www-data bin/console sonata:page:update-core-routes --site=all
+$ docker-compose build
 ```
 
-* **3) Create snapshots**
+* **3) Start the Docker **
 ``` bash
-$ sudo -u www-data bin/console sonata:page:create-snapshots --site=all
+$ docker-compose up -d
 ```
 
-# Continuous Integration
-
-* **Install Git Hook**
+* **4) Install external packaged **
 ``` bash
-$ bash dev-tools/install-hooks.sh
+$ docker exec -it -u www-data  sf3_php php /usr/local/bin/composer install -d /home/wwwroot/sf3/jobportal
 ```
-This will install an hook in your local .git `.git/hooks/pre-commit`. Each time you make a commit, the `ci-integration.sh` script will be executed.
 
-# PHP Unit Test
+* **5) Generate database schema **
+``` bash
+$ docker exec -it -u www-data  sf3_php php  /home/wwwroot/sf3/jobportal/bin/console d:s:u --dump-sql
+```
 
-* Composer dump autoload
+* **6) Create database schema **
 ``` bash
-$ composer dump-autoload
+$ docker exec -it -u www-data  sf3_php php  /home/wwwroot/sf3/jobportal/bin/console d:s:u --force
 ```
-* Run tests for the specific class
+
+* **7) Migration Script **
 ``` bash
-$ ./vendor/bin/simple-phpunit tests/Hopenergie/Components/Enedis/Api/EnedisServicesTest.php
+$ docker exec -it -u www-data  sf3_php php  /home/wwwroot/sf3/jobportal/bin/console d:m:m
 ```
+## docker is running at 127.0.0.1
+
+# Admin section details
+## For adding new job post kindly check below URL
+## http://127.0.0.1/jobpost
+## username: admin
+## password: admin
+
+# For user section
+## http://127.0.0.1
