@@ -15,7 +15,7 @@ $ git clone https://github.com/kailashkds/jobpost.git
 
 ## Once docker is install follow the below steps
 
-* **1) Inside the docker folder
+* **1) Inside the docker folder**
 ``` bash
 $ cd jobpost/
 ```
@@ -25,27 +25,27 @@ $ cd jobpost/
 $ docker-compose build
 ```
 
-* **3) Start the Docker **
+* **3) Start the Docker**
 ``` bash
 $ docker-compose up -d
 ```
 
-* **4) Install external packaged **
+* **4) Install external packaged**
 ``` bash
 $ docker exec -it -u www-data  sf3_php php /usr/local/bin/composer install -d /home/wwwroot/sf3/jobportal
 ```
 
-* **5) Generate database schema **
+* **5) Generate database schema**
 ``` bash
 $ docker exec -it -u www-data  sf3_php php  /home/wwwroot/sf3/jobportal/bin/console d:s:u --dump-sql
 ```
 
-* **6) Create database schema **
+* **6) Create database schema**
 ``` bash
 $ docker exec -it -u www-data  sf3_php php  /home/wwwroot/sf3/jobportal/bin/console d:s:u --force
 ```
 
-* **7) Migration Script **
+* **7) Migration Script**
 ``` bash
 $ docker exec -it -u www-data  sf3_php php  /home/wwwroot/sf3/jobportal/bin/console d:m:m
 ```
