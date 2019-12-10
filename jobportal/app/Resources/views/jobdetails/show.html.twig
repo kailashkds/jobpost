@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Job detail</h1>
+
+    <table class="table table-bordered table-striped text-center">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ jobDetail.id }}</td>
+            </tr>
+            <tr>
+                <th>Cname</th>
+                <td>{{ jobDetail.cname }}</td>
+            </tr>
+            <tr>
+                <th>Job description</th>
+                <td>{{ jobDetail.cdescription }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ jobDetail.status }}</td>
+            </tr>
+            <tr>
+                <th>Ts</th>
+                <td>{% if jobDetail.ts %}{{ jobDetail.ts|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% include 'addRequriments.html.twig' %}
+    <ul>
+        {#<li>
+            <a href="#" id="add-requirement" data-url="{{ path('jobpost_index',{'id':jobDetail}) }}">Add/Edit Requirements</a>
+        </li>#}
+        <li>
+            <a href="{{ path('jobpost_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('jobpost_edit', { 'id': jobDetail.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

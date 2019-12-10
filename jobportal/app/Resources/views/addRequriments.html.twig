@@ -1,0 +1,31 @@
+ <div style="border:1px solid black;margin-top:10px;">
+        {{ render(controller(
+            'JobPostBundle:RequirementJob:index', { 'id': jobDetail.id }
+        )) }}
+        <br>
+        <ul>
+            <li>
+                <a href="#" id="add-requirement" data-url="{{ path('jobpost_requirementjob_new',{'id':jobDetail.id}) }}">Add/Edit Requirements</a>
+            </li>
+        </ul>
+    </div>
+            <br><br>
+            
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", "#add-requirement", function () {
+                $.ajax({
+                    url: $(this).data('url'),
+                    type: "GET",
+                   // data: {"action": "loadall", "id": id},
+                    success: function(data){
+                        $('.modal-body').html(data);
+                        $('#modal').click();
+                    },
+                    error: function(error){
+                         alert('error');
+                    }
+                });
+            });
+        });
+    </script>

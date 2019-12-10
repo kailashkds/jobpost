@@ -1,0 +1,26 @@
+{#{% extends 'base.html.twig' %}#}
+
+{% block body %}
+    {{ form_start(form, {'action': path('jobpost_requirementjob_new',{'id':jobDetails.id}), 'method': 'POST'}) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    {#<ul>
+        <li>
+            <a href="{{ path('jobpost_requirementjob_index') }}">Back to the list</a>
+        </li>
+    </ul>#}
+    <script>
+        $('#jobpostbundle_requirementjob_customRequirement').parent().hide();
+        $(document).on("change", "#jobpostbundle_requirementjob_requirement", function () {
+            if($(this).val() == 'add'){
+                $('#jobpostbundle_requirementjob_customRequirement').parent().show();
+                $('#jobpostbundle_requirementjob_customRequirement').attr('required','required');
+            }else{
+                $('#jobpostbundle_requirementjob_customRequirement').parent().hide();
+                $('#jobpostbundle_requirementjob_customRequirement').attr('required',false);
+            }
+        });
+    </script>
+{% endblock %}

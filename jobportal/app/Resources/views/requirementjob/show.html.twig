@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Requirementjob</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ requirementJob.id }}</td>
+            </tr>
+            <tr>
+                <th>Operator</th>
+                <td>{{ requirementJob.operator }}</td>
+            </tr>
+            <tr>
+                <th>Ts</th>
+                <td>{% if requirementJob.ts %}{{ requirementJob.ts|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('jobpost_requirementjob_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('jobpost_requirementjob_edit', { 'id': requirementJob.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

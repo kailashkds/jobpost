@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Jobdetails list</h1>
+
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cname</th>
+                <th>Cdescription</th>
+                <th>Status</th>
+                <th>Ts</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jobDetail in jobDetails %}
+            <tr>
+                <td><a href="{{ path('jobpost_show', { 'id': jobDetail.id }) }}">{{ jobDetail.id }}</a></td>
+                <td>{{ jobDetail.cname }}</td>
+                <td>{{ jobDetail.cdescription }}</td>
+                <td>{{ jobDetail.status }}</td>
+                <td>{% if jobDetail.ts %}{{ jobDetail.ts|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('jobpost_show', { 'id': jobDetail.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('jobpost_edit', { 'id': jobDetail.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('jobpost_new') }}">Create a new jobDetail</a>
+        </li>
+    </ul>
+{% endblock %}

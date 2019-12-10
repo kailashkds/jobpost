@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Requirement jobs</h3>
+    {% for data in requirementJobs %}
+        <span class="tag label label-info">
+            <span>{{ data.requirement.requirementName }} {{ data.operator }}</span>
+            <a href="#" data-url="{{ path('jobpost_requirementjob_delete',{'id':data.id}) }}" id="delete-req"><i class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a> 
+        </span>
+    {% endfor %}
+    <script>
+        $(document).ready(function () {
+            $(document).on("click", "#delete-req", function () {
+                $.ajax({
+                    url: $(this).data('url'),
+                    type: "GET",
+                   // data: {"action": "loadall", "id": id},
+                    success: function(data){
+                        location.reload();
+                    },
+                    error: function(error){
+                         alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

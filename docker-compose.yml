@@ -1,0 +1,52 @@
+version: '3'
+services:
+    apache:
+        build: docker/apache
+        container_name: sf3_apache
+        ports:
+          - 80:80
+        volumes:
+          - ./docker/apache/config/vhosts:/etc/apache2/sites-enabled
+          - ./jobportal:/home/wwwroot/sf3/jobportal
+        depends_on:
+          - php
+
+    mariadb:
+        image: mariadb:10.1
+        container_name: sf3_mariadb
+        volumes:
+            - mariadb:/var/lib/mysql
+        environment:
+            TZ: "Europe/Rome"
+            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+            MYSQL_ROOT_PASSWORD: "rootpwd"
+            MYSQL_USER: 'testuser'
+            MYSQL_PASSWORD: 'testpassword'
+            MYSQL_DATABASE: 'testdb'
+
+    php:
+        build: docker/php
+        container_name: sf3_php
+        volumes:
+          - .:/home/wwwroot/sf3
+        #environment:
+        #  - maildev_host=sf4_maildev
+        depends_on:
+        #  - maildev
+          - mariadb
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: sf4_phpmyadmin
+        environment:
+          PMA_HOST: mariadb
+          PMA_PORT: 3306
+        ports:
+            - 8080:80
+        links:
+            - mariadb
+volumes:
+    mariadb:
+
+#docker exec -it -u www-data  sf3_php php sf3/jobportal/bin/console doctrine:database:create
+

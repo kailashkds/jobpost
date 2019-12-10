@@ -1,0 +1,8 @@
+job_post:
+    resource: "@JobPostBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
