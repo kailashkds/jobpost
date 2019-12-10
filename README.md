@@ -49,13 +49,18 @@ $ docker exec -it -u www-data  sf3_php php  /home/wwwroot/sf3/jobportal/bin/cons
 ``` bash
 $ docker exec -it -u www-data  sf3_php php  /home/wwwroot/sf3/jobportal/bin/console d:m:m
 ```
-## docker is running at 127.0.0.1
+* **8) Docker Stop**
+``` bash
+$ docker-compose stop
+```
 
-# Admin section details
-## For adding new job post kindly check below URL
-## http://127.0.0.1/jobpost
-## username: admin
-## password: admin
+### docker is running at 127.0.0.1
 
-# For user section
-## http://127.0.0.1
+## Admin section details
+### For adding new job post kindly check below URL
+### http://127.0.0.1/jobpost
+### username: admin
+### password: admin
+
+## For user section
+### http://127.0.0.1
